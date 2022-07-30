@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+       <!-- Inherit Form View to Modify it -->
+       <record id="sale_order_list_view_id" model="ir.ui.view">
+           <field name="name">Sale Order Changes</field>
+           <field name="model">sale.order</field>
+           <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+           <field name="arch" type="xml">
+
+               <xpath expr="//field[@name='name']" position="attributes">
+                   <attribute name="invisible">True</attribute>
+               </xpath>
+
+               <xpath expr="//field[@name='create_date']" position="attributes">
+                   <attribute name="invisible">True</attribute>
+               </xpath>
+
+               <xpath expr="//field[@name='activity_ids']" position="attributes">
+                   <attribute name="invisible">True</attribute>
+               </xpath>
+
+               <xpath expr="//field[@name='activity_ids']" position="replace">
+                   <field name="order_type"/>
+                   <field name="create_date"/>
+                   <field name="user_id"/>
+               </xpath>
+
+               <xpath expr="//field[@name='user_id']" position="after">
+                   <field name="total_roll" />
+               </xpath>
+
+               <xpath expr="//field[@name='partner_id']" position="after">
+                   <field name="sub_customer" />
+<!--                   <field name="payment_received"/>-->
+                   <field name="delivery_confirm"/>
+                   <field name="total_price"/>
+               </xpath>
+
+
+
+
+               <xpath expr="//field[@name='user_id']" position="attributes">
+                   <attribute name="invisible">True</attribute>
+               </xpath>
+
+           </field>
+       </record>
+
+    </data>
+</odoo>
