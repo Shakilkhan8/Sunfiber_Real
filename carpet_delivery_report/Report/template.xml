@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="carpet_delivery_report">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page mt-3" >
+                        <h3 style="text-align:center">PACKING LIST - UNIT-1 SUN FIBER PVT. LTD.</h3>
+
+                        <div class="row" style="margin-top:90px">
+                            <div class="col-4"><p style="margin-left:20px"><b>Date :</b> <t t-esc="order.scheduled_date"/> </p></div>
+                            <div class="col-4 text-center"><b>Customer:  </b> <t t-esc="order.partner_id.name"/> <t t-if="order.sale_id.customer_note">(<t t-esc="order.sale_id.customer_note"/> )</t></div>
+                            <div class="col-4 text-center"><b>Destination:</b> <t t-esc="order.partner_id.name"/> </div>
+                        </div>
+
+                        <br/>
+                            <style>
+                                table, th,td {
+                                border: 1px solid black;
+                                border-collapse: collapse;
+                                }
+                            </style>
+                        <t t-set="loop" t-value="0"/>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-6">
+                                     <table width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Sr No.
+                                        </th>
+                                        <th>
+                                            Design Name
+                                        </th>
+                                        <th>Child Design</th>
+                                        <th>
+                                            Quality
+                                        </th>
+                                        <th>
+                                            Color
+                                        </th>
+                                        <th>
+                                            Length
+                                        </th>
+                                        <th>
+                                            Width
+                                        </th>
+                                        <th>
+                                            Grade
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="ser1" t-value="0"/>
+                                    <t t-if="data_one">
+
+                                    <t t-foreach="data_one" t-as="data_one">
+                                        <t t-set="ser1" t-value="ser1+1"/>
+                                        <tr>
+                                            <td><t t-esc="ser1"/> </td>
+                                            <td><t t-esc="data_one['design_name']"/></td>
+                                            <td>
+                                        <t t-if="data_one['digital_design']">
+                                            Digital Printed/
+                                        </t>
+                                                <t t-else="">
+                                                    <p>No child Design</p>
+                                                </t>
+
+                                            </td>
+                                            <td><t t-esc="data_one['quality_name']"/></td>
+                                            <td><t t-esc="data_one['color']"/></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </t>
+
+                                    </t>
+                                     <t t-else="">
+                                            No Record Found
+                                        </t>
+                                </tbody>
+
+                            </table>
+                                </div>
+
+                                <div class="col-6">
+                                     <table style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Sr No.
+                                        </th>
+                                        <th>
+                                            Design Name
+                                        </th>
+                                        <th>Child Design</th>
+                                        <th>
+                                            Quality
+                                        </th>
+                                        <th>
+                                            Color
+                                        </th>
+                                        <th>
+                                            Length
+                                        </th>
+                                        <th>
+                                            Width
+                                        </th>
+                                        <th>
+                                            Grade
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <t t-if="check &gt; 20 ">
+                                <tbody>
+                                    <t t-set="ser2" t-value="0"/>
+                                    <t t-foreach="data_two" t-as="data_two">
+                                        <t t-set="ser2" t-value="ser2+ 1"/>
+                                    <tr>
+                                            <td><t t-esc="ser2"/> </td>
+                                            <td>
+                                                <t t-esc="data_two['design_name']"/></td>
+                                             <td>
+                                        <t t-if="data_one['digital_design']">
+                                            Digital Printed/
+                                        </t>
+                                                <t t-else="">
+                                                    <p>No child Design</p>
+                                                </t>
+
+                                            </td>
+                                            <td><t t-esc="data_two['quality_name']"/></td>
+                                            <td><t t-esc="data_two['color']"/></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                    </tr>
+                                    </t>
+                                </tbody>
+                                </t>
+                                  <t t-else="">
+                                      <t t-while="loop !&lt; count">
+                                          <t t-set="loop" t-value="loop+1"/>
+                                          <tr>
+                                              <td style="color:white">Empty</td>
+                                              <td style="color:white">Empty</td>
+                                              <td style="color:white">Empty</td>
+                                              <td style="color:white">Empty</td>
+                                              <td style="color:white">Empty</td>
+                                              <td style="color:white">Empty</td>
+                                              <td style="color:white">Empty</td>
+                                              <td style="color:white">Empty</td>
+                                          </tr>
+                                      </t>
+                                  </t>
+
+                            </table>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                            <br/>
+
+                            <!--<div class="row">
+                                <div class="col-4">
+                                    <strong>Role: <t t-esc="total_rolls"/> </strong>
+                                    &lt;!&ndash;                                    <span t-field="o.date"/>&ndash;&gt;
+                                </div>
+                                <div class="col-4">
+                                    <strong>Meters: <t t-esc="total_meter"/> </strong>
+                                    &lt;!&ndash;                                    <span t-field="o.date"/>&ndash;&gt;
+                                </div>
+                                <div class="col-4">
+                                    <strong>Signature:________________________</strong>
+                                    &lt;!&ndash;                                    <span t-field="o.date"/>&ndash;&gt;
+                                </div>
+                            </div>-->
+
+
+                    </div>
+                </t>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>
