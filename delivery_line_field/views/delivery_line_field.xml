@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <record id="delivery_form_inherit_id" model="ir.ui.view">
+            <field name="name">Delivery Form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='origin']" position="after">
+                    <!-- Add your fields or attributes here -->
+<!--                    <field name="test"/>-->
+                </xpath>
+
+                <xpath expr="//form/sheet/notebook/page/field[@name='move_ids_without_package']/tree/field[@name='product_uom_qty']" position="after">
+                    <field name="design_id"/>
+                    <field name="quality_id"/>
+                    <field name="length"/>
+                    <field name="width"/>
+                    <field name="color"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

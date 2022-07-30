@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+       <template id="invoice_report_template_id">
+           <t t-call="web.html_container">
+               <t t-call="web.internal_layout">
+                   <t t-foreach="docs" t-as="o">
+                       <t t-set="total_sqf" t-value="0"/>
+                       <t t-set="total_amount" t-value="0"/>
+                   <div class="page">
+                      <table class="table mt-1" style="border:2px solid black ">
+                          <tr style="border-bottom:1px solid red">
+                              <th>Total SQF</th>
+                              <th>Current Rate</th>
+                              <th>Rate</th>
+                              <th>Delivery</th>
+                              <th>Amount</th>
+                          </tr>
+
+                          <tbody>
+                              <t t-foreach="o.invoice_line_ids" t-as="p">
+                                  <t t-set="total_sqf" t-value="total_sqf + p.sqf"/>
+                                  <t t-set="total_amount" t-value="total_amount + p.price_subtotal"/>
+                              <tr>
+                                  <td style=""><t t-esc="p.sqf"/></td>
+                                  <td><t t-esc="p.price_unit"/></td>
+                                  <td><t t-esc="p.price_unit - p.discount"/></td>
+                                  <td>Yes</td>
+                                  <td><t t-esc="p.price_subtotal"/> </td>
+                              </tr>
+                              </t>
+                              <tr style="border:2px solid black">
+                                  <td style="border-right:2px solid black"><b><t t-esc="total_sqf"/></b></td>
+                                  <td colspan="3"></td>
+                                  <td style="border-left:2px solid black"><b><t t-esc="total_amount"/> </b></td>
+                              </tr>
+                          </tbody>
+                      </table>
+
+                       <div class="row">
+                           <div class="col-4 offset-8 text-right">
+                               <p><b>Total:</b> <t t-esc="total_amount"/> </p>
+                           </div>
+                       </div>
+
+                   </div>
+               </t>
+               </t>
+           </t>
+       </template>
+
+
+
+    </data>
+</odoo>
