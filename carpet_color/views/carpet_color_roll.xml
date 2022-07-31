@@ -47,8 +47,8 @@
 
                 <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='name']"
                        position="after">
-                    <field name="quality_id" invisible="True"/>
-                    <field name="design_id" invisible="True"/>
+                    <field name="quality_id"/>
+                    <field name="design_id"/>
                     <field name="delivered"/>
                 </xpath>
 
@@ -87,21 +87,30 @@
                                     <field name="color_1"/>
                                     <field name="color_1d" optional="hide"/>
                                     <field name="color_1r" optional="hide"/>
+                                    <field name="color_1l" optional="hide"/>
                                     <field name="color_2"/>
                                     <field name="color_3"/>
                                     <field name="color_3l" optional="hide"/>
+                                    <field name="color_3d" optional="hide"/>
                                     <field name="color_4"/>
+                                    <field name="color_4l" optional="hide"/>
                                     <field name="color_5"/>
+                                    <field name="color_5l" optional="hide"/>
                                     <field name="color_6"/>
                                     <field name="color_6d" optional="hide"/>
+                                    <field name="color_6l" optional="hide"/>
                                     <field name="color_6m" optional="hide"/>
                                     <field name="color_7" optional="hide"/>
+                                    <field name="color_7l" optional="hide"/>
                                     <field name="color_8" optional="hide"/>
                                     <field name="color_9" optional="hide"/>
                                     <field name="color_10" optional="hide"/>
+                                    <field name="color_10d" optional="hide"/>
                                     <field name="color_11" optional="hide"/>
+                                    <field name="color_11l" optional="hide"/>
                                     <field name="color_11r" optional="hide"/>
                                     <field name="color_12" optional="hide"/>
+                                    <field name="color_12r" optional="hide"/>
                                     <field name="color_13" optional="hide"/>
                                     <field name="color_13l" optional="hide"/>
                                     <field name="color_14" optional="hide"/>
@@ -113,6 +122,34 @@
                                     <field name="color_18" optional="hide"/>
                                     <field name="color_19" optional="hide"/>
                                     <field name="color_20" optional="hide"/>
+                                    <field name="color_21" optional="hide"/>
+                                    <field name="color_22" optional="hide"/>
+                                    <field name="color_23" optional="hide"/>
+                                    <field name="color_24" optional="hide"/>
+                                    <field name="color_25" optional="hide"/>
+                                    <field name="color_26" optional="hide"/>
+                                    <field name="color_27" optional="hide"/>
+                                    <field name="color_28" optional="hide"/>
+                                    <field name="color_29" optional="hide"/>
+                                    <field name="color_30" optional="hide"/>
+                                    <field name="color_31" optional="hide"/>
+                                    <field name="color_32" optional="hide"/>
+                                    <field name="color_33" optional="hide"/>
+                                    <field name="color_34" optional="hide"/>
+                                    <field name="color_35" optional="hide"/>
+                                    <field name="color_36" optional="hide"/>
+                                    <field name="color_37" optional="hide"/>
+                                    <field name="color_38" optional="hide"/>
+                                    <field name="color_39" optional="hide"/>
+                                    <field name="color_40" optional="hide"/>
+                                    <field name="color_41" optional="hide"/>
+                                    <field name="color_42" optional="hide"/>
+                                    <field name="color_43" optional="hide"/>
+                                    <field name="color_44" optional="hide"/>
+                                    <field name="color_45" optional="hide"/>
+                                    <field name="color_46" optional="hide"/>
+                                    <field name="color_47" optional="hide"/>
+                                    <field name="color_48" optional="hide"/>
                                     <field name="total_qty" force_save="True"/>
                                     <field name="square_foot" force_save="True"/>
                                     <field name="price_unit" force_save="True"/>
