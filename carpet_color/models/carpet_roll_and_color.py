@@ -13,13 +13,12 @@ class CarpetColorModel(models.Model):
     customer_note = fields.Text('Customer Note')
     sub_customer = fields.Char('Sub Customer')
     order_type = fields.Selection([
-        ('mix', 'Mix'),
-        ('solid', 'Solid'),
-        ('classic', 'Classic')
+        ('Mix', 'Mix'),
+        ('Print', 'Print'),
     ], required=True)
 
     delivery_confirm = fields.Selection([
-        ('None-Delivered', 'None Delivered'),
+        ('Non-Delivered', 'Non Delivered'),
         ('Delivered', 'Delivered'),
         ('One-Time', 'One Time'),
         ('Half-Paid', 'Half Paid')
