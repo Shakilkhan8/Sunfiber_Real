@@ -8,6 +8,7 @@ class CarpetColorReport(models.AbstractModel):
         domain = [('color_0', '!=',0), ('color_1', '!=',0), ('color_2', '!=',0), ('color_3', '!=',0), ('color_4', '!=',0), ('color_5', '!=',0), ('color_6', '!=',0), ('color_7', '!=',0), ('color_8', '!=',0), ('color_9', '!=',0), ('color_10', '!=',0), ('color_12', '!=',0), ('color_0', '!=',0)]
         lst = []
         check = 0
+        comp = self.env['res.company'].search([])
         for rec in order:
             for line in rec.color_line_id:
                 if line.child_image:
@@ -103,6 +104,8 @@ class CarpetColorReport(models.AbstractModel):
             'sub_customer': order.sub_customer,
             'order_date': order.date_order,
             'delivery_confirm': order.delivery_confirm,
-            'check': check
+            'check': check,
+            'company_name': comp.name,
+            'logo': comp.logo,
 
         }

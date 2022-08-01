@@ -26,11 +26,11 @@
     'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
+        'reports/order_report_format.xml',
         'reports/report_template.xml',
         'reports/report.xml',
         'reports/order_booking_with_price.xml',
         'reports/manual_packing_list_report.xml',
-        'reports/order_report_format.xml',
         'views/templates.xml',
 
     ],
