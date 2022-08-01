@@ -19,10 +19,10 @@ class CarpetColorModel(models.Model):
     ], required=True)
 
     delivery_confirm = fields.Selection([
-        ('Yes', 'Yes'),
-        ('No', 'No'),
-        ('One Time', 'One Time'),
-        ('Half Paid', 'Half Paid')
+        ('None-Delivered', 'None Delivered'),
+        ('Delivered', 'Delivered'),
+        ('One-Time', 'One Time'),
+        ('Half-Paid', 'Half Paid')
     ], required=True)
 
     total_roll = fields.Float('Total roll')
