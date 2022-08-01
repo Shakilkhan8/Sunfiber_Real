@@ -1,6 +1,6 @@
 <odoo>
     <record id="order_sheet_confirmation_report" model="ir.actions.report">
-        <field name="name">Order Booking Without Price</field>
+        <field name="name">Order Sheet</field>
         <field name="model">sale.order</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">order_sheet_confirmation.carpet_color_report</field>
@@ -16,7 +16,7 @@
                 id="order_booking_report_with_price_id"
                 model="sale.order"
                 report_type="qweb-pdf"
-                string="Order Booking With Price"
+                string="Order Sheet With Bill"
                 name="order_sheet_confirmation.order_booking_with_price"
                 file="order_sheet_confirmation.order_booking_with_price"
             />
