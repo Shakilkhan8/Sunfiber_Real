@@ -8,7 +8,7 @@ class CarpetProductBarcode(models.Model):
     _rec_name = 'categ_id'
 
     categ_id = fields.Many2one('product.category', 'Design *', required=True)
-    carpet_color = fields.Integer('Color *', required=True)
+    carpet_color = fields.Char('Color *', required=True)
     carpet_quality = fields.Many2one("carpet.product.quality", "Quality *", requried=True)
     location_id = fields.Many2one('stock.location', "Location *",  readonly=True, domain=[('usage', '=', 'internal')])
     meters = fields.Float('Enter Meters *', required=True)
@@ -24,7 +24,7 @@ class CarpetProductBarcode(models.Model):
 
     @api.onchange('categ_id')
     def _onchange_category(self):
-        if self.categ_id.name == 'Digital Printed':
+        if self.categ_id.name == 'Digital Printed' or self.categ_id.name == 'Digital Printed with Felt' or self.categ_id.name == 'Tufted Graphics' or self.categ_id.name == 'Tufted Scroll':
             self.check = True
         else:
             self.check = False
@@ -33,18 +33,12 @@ class CarpetProductBarcode(models.Model):
     def create_product_template(self):
         l = []
 
-        if self.categ_id.name == 'Digital Printed':
-
-            # here we create parent and child design relation
-            self.env['digital.print.child'].create({
-                'categ_id': self.categ_id.id,
-            })
-
-            name = self.categ_id.name + " " + " /" + self.digital_print_child.name + "/"+  "( " + str(self.carpet_color) + " )" + " /  " + str(
+        if self.categ_id.name == 'Digital Printed' or self.categ_id.name == 'Digital Printed with Felt' or self.categ_id.name == 'Tufted Graphics' or self.categ_id.name == 'Tufted Scroll':
+            name = self.categ_id.name + " " + " /" + self.digital_print_child.name + "/"+  "( " + self.carpet_color + " )" + " /  " + str(
                 self.meters) + "m" + " / " + self.carpet_quality.display_name
 
         else:
-            name = self.categ_id.name + " " + "( " + str(self.carpet_color) + " )" + " /  " + str(
+            name = self.categ_id.name + " " + "( " + self.carpet_color + " )" + " /  " + str(
             self.meters) + "m" + " / " + self.carpet_quality.display_name,
             self.digital_print_child = False
 
@@ -86,9 +80,9 @@ class BarcodeLabelPrint(models.AbstractModel):
         rec = self.env['carpet.barcode'].search([('id', '=', self._context.get('active_id'))])
 
         if rec.digital_print_child:
-            product_name = rec.categ_id.name + " / " + rec.digital_print_child.name + " / "+ "( " + str(rec.carpet_color) + " )" + " /  " + str(rec.meters) + "m" + " / " + rec.carpet_quality.display_name
+            product_name = rec.categ_id.name + " / " + rec.digital_print_child.name + " / "+ "( " + rec.carpet_color + " )" + " /  " + str(rec.meters) + "m" + " / " + rec.carpet_quality.display_name
         else:
-            product_name = rec.categ_id.name + " / " + "( " + str(rec.carpet_color) + " )" + " /  " + str(rec.meters) + "m" + " / " + rec.carpet_quality.display_name
+            product_name = rec.categ_id.name + " / " + "( " + rec.carpet_color + " )" + " /  " + str(rec.meters) + "m" + " / " + rec.carpet_quality.display_name
 
         return {
             'product_name': product_name,

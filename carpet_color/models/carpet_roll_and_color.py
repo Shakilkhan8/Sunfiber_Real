@@ -1,6 +1,5 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError
-from odoo.exceptions import UserError
 
 
 class CarpetColorModel(models.Model):
@@ -16,7 +15,6 @@ class CarpetColorModel(models.Model):
         ('Mix', 'Mix'),
         ('Print', 'Print'),
     ], required=True)
-
     delivery_confirm = fields.Selection([
         ('Non-Delivered', 'Non Delivered'),
         ('Delivered', 'Delivered'),
@@ -26,15 +24,21 @@ class CarpetColorModel(models.Model):
 
     total_roll = fields.Float('Total roll')
 
+    @api.model
+    def create(self, vals_list):
+        for rec in self:
+            self.price_subtotal = 0
+        res = super(CarpetColorModel, self).create(vals_list)
+        return res
+
     # calculation of square feet in sale order line on the base of rolls and square feet formulla
     @api.onchange('order_line')
     def _onchange_oder_line(self):
 
         for rec in self.order_line:
-
             # calculation of sutotal on the base of price unit and square feet
-            rec.price_subtotal = 0
-            rec.price_subtotal = rec.square_foot * rec.price_unit
+            # rec.price_subtotal = 0
+            # rec.price_subtotal = rec.square_foot * rec.price_unit
 
             rec.quality_id = rec.product_id.product_tmpl_id.carpet_quality_id.id
             rec.design_id = rec.product_id.product_tmpl_id.categ_id.id
@@ -79,7 +83,7 @@ class CarpetColorModel(models.Model):
 
                 if line.design_id:
                     # if parent design is digital printed then we make child design required
-                    if line.design_id.name == 'Digital Printed':
+                    if line.design_id.name == 'Digital Printed' or line.design_id.name == 'Digital Printed with Felt' or line.design_id.name == 'Tufted Graphics' or line.design_id.name == 'Tufted Scroll' :
 
                         line.check_design = True
                     else:
@@ -87,14 +91,14 @@ class CarpetColorModel(models.Model):
 
                     # here we load the parent design image in order booking line
                     line.image = line.design_id.design_image
-                    if line.design_id.name == 'Digital Printed' or line.design_id.name == 'Tufted':
+                    if line.design_id.name == 'Digital Printed' or line.design_id.name == 'Digital Printed with Felt' or line.design_id.name == 'Tufted Scroll' or line.design_id.name == 'Tufted Graphics' :
                         line.child_image = line.child_design_id.image
                     else:
                         line.child_image = False
 
                     # if both design and quality selected then we concatenate the both to create product name
                     if line.design_id and line.quality_id:
-                        if line.design_id.name == 'Digital Printed' or line.design_id.name == 'Tufted':
+                        if line.design_id.name == 'Digital Printed' or line.design_id.name == 'Digital Printed with Felt'  or line.design_id.name == 'Tufted Scroll' or line.design_id.name == 'Tufted Graphics':
                             line.product_id = line.design_id.name + " / " + line.child_design_id.name + " / " + line.quality_id.name
                         else:
                             line.product_id = line.design_id.name + " " + line.quality_id.name
@@ -202,74 +206,72 @@ class InheritSaleOrderLine(models.Model):
     design_id = fields.Many2one('product.category', 'Design')
     square_foot = fields.Float('Square Foot')
     delivered = fields.Date('Delivered')
+    price_subtotal = fields.Float(store=1)
+    price_unit = fields.Float('Price Unit', store=True)
 
-    def _prepare_invoice_line(self, **optional_values):
+    @api.depends('square_foot','price_unit')
+    def _compute_sutotal(self):
+        for line in self:
+            line.price_subtotal = line.price_unit *  line.square_foot
 
-        self.ensure_one()
-
-        res = {
-            'display_type': self.display_type,
-            'sequence': self.sequence,
-            'name': self.name,
-            'product_id': self.product_id.id,
-            'product_uom_id': self.product_uom.id,
-            'quantity': self.qty_to_invoice,
-            'discount': self.discount,
-            'price_unit': self.price_unit,
-            'sqf': self.square_foot,
-            'quality_id': self.quality_id.id,
-            'tax_ids': [(6, 0, self.tax_id.ids)],
-            'analytic_tag_ids': [(6, 0, self.analytic_tag_ids.ids)],
-            'sale_line_ids': [(4, self.id)],
-        }
-
-        if self.order_id.analytic_account_id:
-            res['analytic_account_id'] = self.order_id.analytic_account_id.id
-        if optional_values:
-            res.update(optional_values)
-        if self.display_type:
-            res['account_id'] = False
-        return res
+    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id')
+    def _compute_amount(self):
+        """
+        Compute the amounts of the SO line.
+        """
+        for line in self:
+            price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
+            taxes = line.tax_id.compute_all(price, line.order_id.currency_id, line.product_uom_qty,
+                                            product=line.product_id, partner=line.order_id.partner_shipping_id)
+            line.update({
+                'price_tax': taxes['total_included'] - taxes['total_excluded'],
+                'price_total': taxes['total_included'],
+                'price_subtotal': line.price_unit * line.square_foot
+            })
+            if self.env.context.get('import_file', False) and not self.env.user.user_has_groups(
+                    'account.group_account_manager'):
+                line.tax_id.invalidate_cache(['invoice_repartition_line_ids'], [line.tax_id.id])
 
 
-class InheritSaleOrder(models.Model):
-    _inherit = 'sale.order'
 
-    def _create_invoices(self, grouped=False, final=False, date=None):
-        res = super(InheritSaleOrder, self)._create_invoices(grouped, final)
-        line_sum_up = []
-        actual_line_dict = res.invoice_line_ids.read()
-        o = 90
-        existing_ids = res.invoice_line_ids.ids
-        existing_line_ids = res.line_ids.ids
-        for each_dict in actual_line_dict:
-            dict_exist = next(
-                (item for item in line_sum_up if item[2]['quality_id'][0] ==
-                 each_dict['quality_id'][0]), None)
-            if not dict_exist:
-                each_dict['account_id'] = each_dict['account_id'][0]
-                line_sum_up.append(((0, 0, each_dict)))
-            else:
-                dict_exist[2]['quantity'] += each_dict['quantity']
-                dict_exist[2]['price_subtotal'] += each_dict['price_subtotal']
-                dict_exist[2]['credit'] += each_dict['credit']
-                dict_exist[2]['debit'] += each_dict['debit']
-
-        # res.line_ids.unlink()
-        res.invoice_line_ids = line_sum_up
-
-        # we will remove the old id's data here
-
-        # ids = set(res.invoice_line_ids.ids) - set(existing_ids)
-        # o = res.write({'invoice_line_ids': next(iter(ids))})
-        # for line in res.invoice_line_ids:
-        #     if line.id in existing_ids:
-        #         line.unlink()
-        #
-        # for line in res.line_ids:
-        #     if line.id in existing_ids:
-        #         line.unlink()
-        return res
+# class InheritSaleOrder(models.Model):
+#     _inherit = 'sale.order'
+#
+#     def _create_invoices(self, grouped=False, final=False, date=None):
+#         res = super(InheritSaleOrder, self)._create_invoices(grouped, final)
+#         line_sum_up = []
+#         actual_line_dict = res.invoice_line_ids.read()
+#         o = 90
+#         existing_ids = res.invoice_line_ids.ids
+#         existing_line_ids = res.line_ids.ids
+#         for each_dict in actual_line_dict:
+#             dict_exist = next(
+#                 (item for item in line_sum_up if item[2]['quality_id'][0] ==
+#                  each_dict['quality_id'][0]), None)
+#             if not dict_exist:
+#                 each_dict['account_id'] = each_dict['account_id'][0]
+#                 line_sum_up.append(((0, 0, each_dict)))
+#             else:
+#                 dict_exist[2]['quantity'] += each_dict['quantity']
+#                 dict_exist[2]['price_subtotal'] += each_dict['price_subtotal']
+#                 dict_exist[2]['credit'] += each_dict['credit']
+#                 dict_exist[2]['debit'] += each_dict['debit']
+#
+#         # res.line_ids.unlink()
+#         res.invoice_line_ids = line_sum_up
+#
+#         # we will remove the old id's data here
+#
+#         # ids = set(res.invoice_line_ids.ids) - set(existing_ids)
+#         # o = res.write({'invoice_line_ids': next(iter(ids))})
+#         # for line in res.invoice_line_ids:
+#         #     if line.id in existing_ids:
+#         #         line.unlink()
+#         #
+#         # for line in res.line_ids:
+#         #     if line.id in existing_ids:
+#         #         line.unlink()
+#         return res
 
 
 class StockMoveModel(models.Model):

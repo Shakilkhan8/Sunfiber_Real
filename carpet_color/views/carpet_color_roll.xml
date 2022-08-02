@@ -45,6 +45,11 @@
                     <field name="square_foot"/>
                 </xpath>
 
+                <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_subtotal']"
+                       position="replace">
+                    <field name="price_subtotal" force_save="1"/>
+                </xpath>
+
                 <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='name']"
                        position="after">
                     <field name="quality_id"/>
@@ -65,12 +70,12 @@
                 <xpath expr="//page[@name='order_lines']" position="before">
                     <notebook string="Order Booking">
                         <page string="Carpet Colors">
-                            <field name="color_line_id" widget="section_and_note_one2many"  >
-                                <tree string="Carpet Colors" editable="bottom">
+                            <field name="color_line_id" widget="section_and_note_one2many" mode="tree,kanban" >
+                                <tree string="Carpet Colors" editable="bottom" >
                                    <control>
-                                        <create name="add_product_control" string="Add a product" />
-                                        <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
-                                        <create name="add_note_control" string="Add a note"  context="{'default_display_type': 'line_note'}"/>
+                                        <create  string="Add product" />
+                                        <create  string="Add a section"  context="{'default_display_type': 'line_section'}"/>
+                                        <create  string="Add a note" context="{'default_display_type': 'line_note'}"/>
                                     </control>
 
                                     <field name="sequence" widget="handle"/>
