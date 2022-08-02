@@ -1,13 +1,6 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
-
-class SaleOrderInherit(models.TransientModel):
-    _inherit = 'sale.order'
-
-
-
-
 class InvoiceLineModel(models.Model):
     _inherit = 'sale.order.line'
 
