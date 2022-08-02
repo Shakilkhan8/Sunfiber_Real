@@ -5,7 +5,7 @@ class CarpetProductFields(models.Model):
     _inherit = 'product.template'
 
 
-    carpet_color = fields.Integer("Color")
+    carpet_color = fields.Char("Color")
     unit_of_measure = fields.Char("Unit of Measure", default='m', readonly=True)
     carpet_length = fields.Float("Length")
     carpet_width = fields.Float("Width")
