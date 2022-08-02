@@ -2,6 +2,12 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
 
+class SaleOrderInherit(models.TransientModel):
+    _inherit = 'sale.order'
+
+
+
+
 class InvoiceLineModel(models.Model):
     _inherit = 'sale.order.line'
 
@@ -19,7 +25,6 @@ class InvoiceLineModel(models.Model):
             'discount': self.discount,
             'price_unit': self.price_unit,
             'sqf': self.square_foot,
-            'price_subtotal': self.price_subtotal,
             'quality_id': self.quality_id.id,
             'tax_ids': [(6, 0, self.tax_id.ids)],
             'analytic_tag_ids': [(6, 0, self.analytic_tag_ids.ids)],
@@ -36,11 +41,10 @@ class InvoiceLineModel(models.Model):
 
 
 class InvoiceLineModel(models.Model):
-    _inherit = 'account.move.line'
+    _inherit = 'account.move'
 
     def default_get(self, fields_list):
+        for line in self.invoice_line_ids:
+            line.update({'price_subtotal': line.sqf * line.price_unit})
         res = super(InvoiceLineModel, self).default_get(fields_list)
-        for line in self:
-            total= line.price_unit * line.sqf
-            line.update({'price_subtotal': line.price_unit * line.sqf})
-        return  res
+        return res
