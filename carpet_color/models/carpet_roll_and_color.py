@@ -8,7 +8,10 @@ class CarpetColorModel(models.Model):
     color_line_id = fields.One2many('carpet.color.line', 'sale_order_id')
     currency_id = fields.Many2one('res.currency')
     total_price = fields.Monetary('Total Price', readonly=True, store=True)
-    payment_received = fields.Boolean('Payment Received', default=False)
+    payment_received = fields.Selection([
+        ('Yes', 'Yes'),
+        ('No', 'No')
+    ])
     customer_note = fields.Text('Customer Note')
     sub_customer = fields.Char('Sub Customer')
     order_type = fields.Selection([
@@ -22,7 +25,8 @@ class CarpetColorModel(models.Model):
         ('Half-Paid', 'Half Paid')
     ], required=True)
 
-    total_roll = fields.Float('Total roll')
+    total_roll = fields.Integer('Total roll')
+
 
     @api.model
     def create(self, vals_list):
@@ -31,14 +35,15 @@ class CarpetColorModel(models.Model):
         res = super(CarpetColorModel, self).create(vals_list)
         return res
 
+
+
+
     # calculation of square feet in sale order line on the base of rolls and square feet formulla
     @api.onchange('order_line')
     def _onchange_oder_line(self):
 
         for rec in self.order_line:
             # calculation of sutotal on the base of price unit and square feet
-            # rec.price_subtotal = 0
-            # rec.price_subtotal = rec.square_foot * rec.price_unit
 
             rec.quality_id = rec.product_id.product_tmpl_id.carpet_quality_id.id
             rec.design_id = rec.product_id.product_tmpl_id.categ_id.id
@@ -130,8 +135,8 @@ class CarpetColorline(models.Model):
     color_1l = fields.Integer("1L")
     color_2 = fields.Integer("2")
     color_3 = fields.Integer("3")
-    color_3l = fields.Integer("3L")
     color_3d = fields.Integer("3D")
+    color_3l = fields.Integer("3L")
     color_4 = fields.Integer("4")
     color_4l = fields.Integer("4L")
     color_5 = fields.Integer("5")
@@ -209,6 +214,10 @@ class InheritSaleOrderLine(models.Model):
     price_subtotal = fields.Float(store=1)
     price_unit = fields.Float('Price Unit', store=True)
 
+
+
+
+
     @api.depends('square_foot','price_unit')
     def _compute_sutotal(self):
         for line in self:
@@ -233,52 +242,12 @@ class InheritSaleOrderLine(models.Model):
                 line.tax_id.invalidate_cache(['invoice_repartition_line_ids'], [line.tax_id.id])
 
 
-
-# class InheritSaleOrder(models.Model):
-#     _inherit = 'sale.order'
-#
-#     def _create_invoices(self, grouped=False, final=False, date=None):
-#         res = super(InheritSaleOrder, self)._create_invoices(grouped, final)
-#         line_sum_up = []
-#         actual_line_dict = res.invoice_line_ids.read()
-#         o = 90
-#         existing_ids = res.invoice_line_ids.ids
-#         existing_line_ids = res.line_ids.ids
-#         for each_dict in actual_line_dict:
-#             dict_exist = next(
-#                 (item for item in line_sum_up if item[2]['quality_id'][0] ==
-#                  each_dict['quality_id'][0]), None)
-#             if not dict_exist:
-#                 each_dict['account_id'] = each_dict['account_id'][0]
-#                 line_sum_up.append(((0, 0, each_dict)))
-#             else:
-#                 dict_exist[2]['quantity'] += each_dict['quantity']
-#                 dict_exist[2]['price_subtotal'] += each_dict['price_subtotal']
-#                 dict_exist[2]['credit'] += each_dict['credit']
-#                 dict_exist[2]['debit'] += each_dict['debit']
-#
-#         # res.line_ids.unlink()
-#         res.invoice_line_ids = line_sum_up
-#
-#         # we will remove the old id's data here
-#
-#         # ids = set(res.invoice_line_ids.ids) - set(existing_ids)
-#         # o = res.write({'invoice_line_ids': next(iter(ids))})
-#         # for line in res.invoice_line_ids:
-#         #     if line.id in existing_ids:
-#         #         line.unlink()
-#         #
-#         # for line in res.line_ids:
-#         #     if line.id in existing_ids:
-#         #         line.unlink()
-#         return res
-
-
 class StockMoveModel(models.Model):
     _inherit = 'stock.move.line'
 
     quality_id = fields.Many2one('carpet.product.quality')
     design_id = fields.Many2one('product.category')
+
 
 
 class StockMoveModel(models.Model):
