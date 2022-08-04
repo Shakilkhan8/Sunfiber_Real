@@ -4,7 +4,7 @@
 
         <template id="manual_packing_list_id">
             <t t-call="web.html_container">
-                <t t-call="web.external_layout">
+                <t t-call="web.internal_layout">
 
                     <div class="page">
                         <p class="text-center">Sunfiber Management</p>
@@ -12,41 +12,57 @@
 
                         <table width="100%">
                             <tr>
-                                <th>Customer :</th>
+                                <th>Customer : <t t-esc="customer"/> </th>
                                 <th>Destination :__________________</th>
                             </tr>
 
                         </table>
 
-                        <table class="table table-bordered mt-1">
-                            <thead>
-                                <th>SR.</th>
-                                <th>Design Name</th>
-                                <th>Quality</th>
-                                <th>Color</th>
-                                <th>Length</th>
-                                <th>Width</th>
-                                <th>Grade</th>
-                            </thead>
-                            <tbody>
-                                <t t-set="ser" t-value="0"/>
-                                <t t-foreach="data" t-as="p">
-                                    <t t-set="ser" t-value="ser+1"/>
-                                <tr>
-                                    <td><t t-esc="ser"/></td>
-                                    <td><t t-esc="p['design_name']"/></td>
-                                    <td><t t-esc="p['quality_id']"/></td>
-                                    <td><t t-esc="p['color']"/> </td>
-                                    <td></td>
-                                    <td> </td>
-                                    <td> </td>
-                                </tr>
-                                </t>
+                        <div class="row">
+                                <table class="table table-bordered mt-1">
+                                    <thead>
+                                        <th>SR.</th>
+                                        <th>Design Name</th>
+                                        <th>Child Design</th>
+                                        <th>Quality</th>
+                                        <th>Color</th>
+                                        <th>Length</th>
+                                        <th>Width</th>
+                                        <th>Grade</th>
+                                    </thead>
+                                    <tbody>
+                                        <t t-set="check" t-value="0"/>
+                                        <t t-set="ser" t-value="0"/>
 
-                            </tbody>
+                                        <t t-foreach="data" t-as="p">
 
-                        </table>
+                                            <t t-set="ser" t-value="ser+1"/>
+                                            <tr>
+                                                <td>
+                                                    <t t-esc="ser"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="p['design_name']"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="p['child_design']"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="p['quality_id']"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="p['color']"/>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </t>
 
+                                    </tbody>
+
+                                </table>
+                            </div>
                     </div>
                 </t>
             </t>

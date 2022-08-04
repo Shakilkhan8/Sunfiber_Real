@@ -35,7 +35,7 @@
                     </div>
                     <t t-set="total_price" t-value="0"/>
                     <t t-set="total_rolls" t-value="0"/>
-
+                    <br/>
                     <table class="table tbl-sm table-bordered mt-4">
                         <thead style="margin-top:20px">
                             <th class="text-center">Design</th>
