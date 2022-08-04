@@ -77,7 +77,7 @@
                                     <field name="sequence" widget="handle"/>
                                     <!-- We do not display the type because we don't want the user to be bothered with that information if he has no section or note. -->
                                     <field name="display_type" invisible="1"/>
-                                    <!--                                    <field name="product_id" />-->
+                                    <field name="product_id" />
                                     <field name="design_id"/>
                                     <field name="check_design" invisible="True"/>
                                     <field name="child_design_id" attrs="{'required': [('check_design', '=', True)]}"/>
