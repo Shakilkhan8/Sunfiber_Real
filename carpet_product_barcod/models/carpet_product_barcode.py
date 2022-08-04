@@ -32,14 +32,13 @@ class CarpetProductBarcode(models.Model):
 
     def create_product_template(self):
         l = []
-
         if self.categ_id.name == 'Digital Printed' or self.categ_id.name == 'Digital Printed with Felt' or self.categ_id.name == 'Tufted Graphics' or self.categ_id.name == 'Tufted Scroll':
             name = self.categ_id.name + " " + " /" + self.digital_print_child.name + "/"+  "( " + self.carpet_color + " )" + " /  " + str(
                 self.meters) + "m" + " / " + self.carpet_quality.display_name
 
         else:
             name = self.categ_id.name + " " + "( " + self.carpet_color + " )" + " /  " + str(
-            self.meters) + "m" + " / " + self.carpet_quality.display_name,
+            self.meters) + "m" + " / " + self.carpet_quality.display_name
             self.digital_print_child = False
 
         pro = self.env['product.template'].create({
