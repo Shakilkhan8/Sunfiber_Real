@@ -15,7 +15,7 @@
                 <xpath expr="//field[@name='partner_id']" position="after">
                     <field name="sub_customer"/>
                     <field name="customer_note"/>
-                    <field name="total_roll"/>
+                  
 
                 </xpath>
                 <xpath expr="//field[@name='payment_term_id']" position="replace">
