@@ -13,7 +13,6 @@ class CarpetColorReport(models.AbstractModel):
             for line in rec.color_line_id:
                 if line.child_image:
                     check = 1
-
                 lst.append({
 
                     'product_name': line.product_id,

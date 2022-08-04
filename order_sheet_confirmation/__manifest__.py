@@ -32,6 +32,7 @@
         'reports/order_booking_with_price.xml',
         'reports/manual_packing_list_report.xml',
         'reports/manual_report_format.xml',
+        'reports/report_header.xml',
         'views/templates.xml',
 
     ],
