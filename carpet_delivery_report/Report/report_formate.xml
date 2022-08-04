@@ -22,7 +22,7 @@
 
             <field name="header_line" eval="False"/>
 
-            <field name="header_spacing">0</field>
+            <field name="header_spacing">5</field>
 
             <field name="dpi">70</field>
 

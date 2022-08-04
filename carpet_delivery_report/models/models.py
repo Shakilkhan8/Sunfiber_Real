@@ -7,30 +7,23 @@ class DeliveryPackingModel(models.Model):
     def _get_report_values(self, docids, data=None):
         order =  self.env['stock.picking'].browse(docids)
 
-        lst_one = []
-        lst_two = []
+        data = []
         count = 0
         for line in order.move_ids_without_package:
 
-            count = count + 1
             if count != 20:
-                lst_one.append({
+                data.append({
                 'design_name': line.design_id.name,
                 'quality_name': line.quality_id.name,
                 'color': line.color,
-                'digital_design': 'Digital Printed' if line.design_id.name == 'Digital Printed' else None
+                'length': line.length,
+                'width': line.width,
+                'color': line.product_id.carpet_color,
             })
-            if count > 2:
-                lst_two.append({
-                    'design_name': line.design_id.name,
-                    'quality_name': line.quality_id.name,
-                    'color': line.color,
-                    'digital_design': 'Digital Printed' if line.design_id.name == 'Digital Printed' else None
-                })
+
 
         return {
-            'data_one': lst_one,
-            'data_two': lst_two,
+            'record1': data,
             'check': count,
             'order': order
         }
