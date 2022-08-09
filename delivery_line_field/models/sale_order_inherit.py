@@ -16,6 +16,5 @@ class SaleOrderModel(models.Model):
                 line.move_ids.design_id = line.design_id.id
                 line.move_ids.width = line.product_id.carpet_width
                 line.move_ids.color = line.product_id.carpet_color
-                line.move_ids.customer_location = line.location.id
 
         return res
