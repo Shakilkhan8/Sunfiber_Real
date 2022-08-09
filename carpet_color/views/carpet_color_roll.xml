@@ -15,8 +15,6 @@
                 <xpath expr="//field[@name='partner_id']" position="after">
                     <field name="sub_customer"/>
                     <field name="customer_note"/>
-                    <!--<field name="total_roll"/>-->
-
 
                 </xpath>
                 <xpath expr="//field[@name='payment_term_id']" position="replace">
@@ -56,40 +54,39 @@
                        position="after">
                     <field name="quality_id"/>
                     <field name="design_id"/>
-                    <field name="delivered"/>
-
-                </xpath>
-                <xpath expr="//form/sheet/notebook/page/field/tree/field[@name='product_id']" position="attributes">
-                    <attribute name="domain">[('qty_available', '>', 0)]</attribute>
                 </xpath>
 
-                <xpath expr="//form/sheet/notebook/page/field/tree/field[@name='tax_id']" position="attributes">
-                    <attribute name="invisible">True</attribute>
-                </xpath>
+
+                <!--adding quality, design and unit of measure to sale_order_line-->
+
+               <!-- <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='name']"
+                       position="after">
+                    <field name="quality_id"/>
+                    <field name="design_id"/>
+                </xpath>-->
 
                 <!--adding carpet color line to sale order-->
                 <xpath expr="//page[@name='order_lines']" position="before">
                     <notebook string="Order Booking">
                         <page string="Carpet Colors">
-                            <field name="color_line_id" widget="section_and_note_one2many" mode="tree,kanban">
-                                <tree string="Carpet Colors" editable="bottom">
-                                    <control>
-                                        <create string="Add product"/>
-                                        <create string="Add a section"
-                                                context="{'default_display_type': 'line_section'}"/>
-                                        <create string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                            <field name="color_line_id" widget="section_and_note_one2many" mode="tree,kanban" >
+                                <tree string="Carpet Colors" editable="bottom" >
+                                   <control>
+                                        <create  string="Add product" />
+                                        <create  string="Add a section"  context="{'default_display_type': 'line_section'}"/>
+                                        <create  string="Add a note" context="{'default_display_type': 'line_note'}"/>
                                     </control>
 
                                     <field name="sequence" widget="handle"/>
                                     <!-- We do not display the type because we don't want the user to be bothered with that information if he has no section or note. -->
                                     <field name="display_type" invisible="1"/>
-                                    <field name="product_id" />
+                                    <field name="product_id"/>
                                     <field name="design_id"/>
                                     <field name="check_design" invisible="True"/>
                                     <field name="child_design_id" attrs="{'required': [('check_design', '=', True)]}"/>
                                     <field name="child_image" widget="image" width="40" height="40"/>
                                     <field name="quality_id"/>
-                                    <!--                                    <field name="delivery_confirm"/>-->
+<!--                                    <field name="delivery_confirm"/>-->
                                     <field name="color_0" optional="hide"/>
                                     <field name="color_1"/>
                                     <field name="color_1d" optional="hide"/>
@@ -160,10 +157,19 @@
                                     <field name="total_qty" force_save="True"/>
                                     <field name="square_foot" force_save="True"/>
                                     <field name="price_unit" force_save="True"/>
-                                    <!--<field name="discount" force_save="True"/>-->
+                                    <field name="discount" force_save="True"/>
                                     <field name="total_price" force_save="True"/>
                                     <field name="image" widget="image" width="40px" height="40px"/>
                                 </tree>
+
+<!--                                <form>-->
+<!--                                    <field name="display_type" invisible="1"/>-->
+<!--                                    &lt;!&ndash;-->
+<!--                                        We need the sequence field to be here for new lines to be added at the correct position.-->
+<!--                                        TODO: at some point we want to fix this in the framework so that an invisible field is not required.-->
+<!--                                    &ndash;&gt;-->
+<!--                                    <field name="sequence" invisible="1"/>-->
+<!--                                </form>-->
 
                             </field>
                         </page>
