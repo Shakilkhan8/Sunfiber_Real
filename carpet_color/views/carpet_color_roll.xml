@@ -56,14 +56,10 @@
                     <field name="design_id"/>
                 </xpath>
 
+                <xpath expr="//form/sheet/notebook/page/field/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="domain">[('qty_available', '>', 0)]</attribute>
+                </xpath>
 
-                <!--adding quality, design and unit of measure to sale_order_line-->
-
-               <!-- <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='name']"
-                       position="after">
-                    <field name="quality_id"/>
-                    <field name="design_id"/>
-                </xpath>-->
 
                 <!--adding carpet color line to sale order-->
                 <xpath expr="//page[@name='order_lines']" position="before">

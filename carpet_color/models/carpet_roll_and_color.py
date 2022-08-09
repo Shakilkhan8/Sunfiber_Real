@@ -8,7 +8,11 @@ class CarpetColorModel(models.Model):
     color_line_id = fields.One2many('carpet.color.line', 'sale_order_id')
     currency_id = fields.Many2one('res.currency')
     total_price = fields.Monetary('Total Price', readonly=True, store=True)
-    payment_received = fields.Boolean('Payment Received', default=False)
+   
+    payment_received = fields.Selection([
+        ('Yes', 'Yes'),
+        ('No', 'No')
+    ])
     customer_note = fields.Text('Customer Note')
     sub_customer = fields.Char('Sub Customer')
     order_type = fields.Selection([
