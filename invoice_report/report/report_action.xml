@@ -13,5 +13,15 @@
                    file="invoice_report.invoice_report_template_id"
                />
 
+         <report
+                   id="invoice_report_id"
+                   model="account.move"
+                   report_type="qweb-pdf"
+                   string="Bill Report"
+                   name="invoice_report.invoice_report_template_id"
+                   file="invoice_report.invoice_report_template_id"
+               />
+
+
     </data>
 </odoo>

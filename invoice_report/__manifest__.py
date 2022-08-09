@@ -27,6 +27,7 @@
         'views/templates.xml',
         'report/report_action.xml',
         'report/report_template.xml',
+        'report/invoice_report_header.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -4,45 +4,134 @@
 
        <template id="invoice_report_template_id">
            <t t-call="web.html_container">
-               <t t-call="web.internal_layout">
+
+               <t t-call="web.basic_layout">
                    <t t-foreach="docs" t-as="o">
+                        <t t-call="invoice_report.invoice_report_header_id"/>
                        <t t-set="total_sqf" t-value="0"/>
                        <t t-set="total_amount" t-value="0"/>
                    <div class="page">
-                      <table class="table mt-1" style="border:2px solid black ">
-                          <tr style="border-bottom:1px solid red">
-                              <th>Total SQF</th>
-                              <th>Current Rate</th>
-                              <th>Rate</th>
-                              <th>Delivery</th>
-                              <th>Amount</th>
+
+
+
+                      <table class="mt-1" width="100%" style="border:1px solid black ">
+                          <thead>
+                              <th class="text-center" style="border: 1px solid black">Sr.No</th>
+                              <th class="text-center" style="border: 1px solid black">Description</th>
+                              <th class="text-center" style="border: 1px solid black">Width (Meter)</th>
+                              <th class="text-center" style="border: 1px solid black">Length (Meter)</th>
+                              <th class="text-center" style="border: 1px solid black">Quantity</th>
+                              <th class="text-center" style="border: 1px solid black">Rate</th>
+                              <th class="text-center" style="border: 1px solid black">Amount (PKR)</th>
+                          </thead>
+                          <tr>
+                              <td style="border:1px solid black; text-align:center" height="300px">
+                                  <table width="100%" style="margin-bottom:390px;">
+                                      <t t-set="ser" t-value="0"/>
+                                      <t t-set="total_length" t-value="0"/>
+                                      <t t-set="total_qty" t-value="0"/>
+                                      <t t-set="total_amount" t-value="0"/>
+                                      <t t-foreach="o.invoice_line_ids" t-as="p">
+                                          <t t-set="ser" t-value="ser + 1"/>
+                                          <t t-set="total_length" t-value="total_length + p.product_id.carpet_length"/>
+                                          <t t-set="total_qty" t-value="total_qty + p.quantity"/>
+                                          <t t-set="total_amount" t-value="total_amount + p.price_subtotal"/>
+                                          <tr>
+                                              <td>
+                                                  <p class="mt-2"> <t t-esc="ser"/></p>
+                                              </td>
+                                          </tr>
+                                      </t>
+                                  </table>
+                              </td>
+
+                              <td style="border:1px solid black; text-align:center" height="500px">
+                                  <table width="100%" style="margin-bottom:390px;">
+                                      <t t-foreach="o.invoice_line_ids" t-as="p">
+                                          <tr>
+                                              <td>
+                                                  <p class="mt-2"> <t t-esc="p.product_id.name"/></p>
+                                              </td>
+                                          </tr>
+                                      </t>
+                                  </table>
+                              </td>
+
+                              <td style="border:1px solid black; text-align:center" height="500px">
+                                  <table width="100%" style="margin-bottom:390px;">
+                                      <t t-foreach="o.invoice_line_ids" t-as="p">
+                                          <tr>
+                                              <td>
+                                                  <p class="mt-2"><t t-esc="p.product_id.carpet_width"/></p>
+                                              </td>
+                                          </tr>
+                                      </t>
+                                  </table>
+                              </td>
+
+                                  <td style="border:1px solid black; text-align:center" height="500px">
+                                  <table width="100%" style="margin-bottom:390px;">
+                                      <t t-foreach="o.invoice_line_ids" t-as="p">
+                                          <tr>
+                                              <td >
+                                                  <p class="mt-2"><t t-esc="p.product_id.carpet_length"/></p>
+                                              </td>
+                                          </tr>
+                                      </t>
+                                  </table>
+                              </td>
+
+                              <td style="border:1px solid black; text-align:center" height="500px">
+                                  <table width="100%" style="margin-bottom:390px;">
+                                      <t t-foreach="o.invoice_line_ids" t-as="p">
+                                          <tr>
+                                              <td>
+                                                  <p class="mt-2"> <t t-esc="p.quantity"/></p>
+                                              </td>
+                                          </tr>
+                                      </t>
+                                  </table>
+                              </td>
+
+                              <td style="border:1px solid black; text-align:center" height="500px">
+                                  <table width="100%" style="margin-bottom:390px;">
+                                      <t t-foreach="o.invoice_line_ids" t-as="p">
+                                          <tr>
+                                              <td>
+                                                  <p class="mt-2"><t t-esc="p.price_unit"/></p>
+                                              </td>
+                                          </tr>
+                                      </t>
+                                  </table>
+                              </td>
+
+                              <td style="border:1px solid black; text-align:center" height="500px">
+                                  <table width="100%" style="margin-bottom:390px;">
+                                      <t t-foreach="o.invoice_line_ids" t-as="p">
+                                          <tr>
+                                              <td>
+                                                  <p class="mt-2"><t t-esc="p.price_subtotal"/></p>
+                                              </td>
+                                          </tr>
+                                      </t>
+                                  </table>
+                              </td>
+
                           </tr>
 
-                          <tbody>
-                              <t t-foreach="o.invoice_line_ids" t-as="p">
-                                  <t t-set="total_sqf" t-value="total_sqf + p.sqf"/>
-                                  <t t-set="total_amount" t-value="total_amount + p.price_subtotal"/>
-                              <tr>
-                                  <td style=""><t t-esc="p.sqf"/></td>
-                                  <td><t t-esc="p.price_unit"/></td>
-                                  <td><t t-esc="p.price_unit - p.discount"/></td>
-                                  <td>Yes</td>
-                                  <td><t t-esc="p.price_subtotal"/> </td>
+                              <tr style="border:1px solid black">
+                                  <td  style="border-right:1px solid black; text-align:center"><b></b></td>
+                                  <td style="border-right:1px solid black; text-align:center"><b>Total</b></td>
+                                  <td style="border-right:1px solid black; text-align:center"></td>
+                                  <td style="border-right:1px solid black; text-align:center"><b><t t-esc="total_length"/></b></td>
+                                  <td style="border-right:1px solid black; text-align:center"><b><t t-esc="total_qty"/></b> </td>
+                                  <td style="border-right:1px solid black; text-align:center"></td>
+
+                                  <td style="border-left:1px solid black; text-align:center"><b><t t-esc="total_amount" t-options='{"widget": "float", "precision": 0}'/> </b></td>
                               </tr>
-                              </t>
-                              <tr style="border:2px solid black">
-                                  <td style="border-right:2px solid black"><b><t t-esc="total_sqf"/></b></td>
-                                  <td colspan="3"></td>
-                                  <td style="border-left:2px solid black"><b><t t-esc="total_amount"/> </b></td>
-                              </tr>
-                          </tbody>
                       </table>
 
-                       <div class="row">
-                           <div class="col-4 offset-8 text-right">
-                               <p><b>Total:</b> <t t-esc="total_amount"/> </p>
-                           </div>
-                       </div>
+
 
                    </div>
                </t>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="invoice_report_header_id">
+            <t t-set="company" t-value="user.company_id"/>
+            <div class="header ">
+                <h5 class="text-center mt-1">
+					Bill Report
+                </h5>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6 text-left"><span>Party Name: <t t-esc="o.partner_id.name"/></span></div>
+                        <div class="col-6 text-right"><span><t t-esc="o.invoice_date"/></span></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="footer">
+
+            </div>
+        </template>
+
+    </data>
+</odoo>
