@@ -28,6 +28,7 @@
         'views/views.xml',
         'views/templates.xml',
         'views/invoice_line_view.xml',
+        'views/invoice_line_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

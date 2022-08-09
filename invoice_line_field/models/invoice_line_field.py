@@ -8,7 +8,6 @@ class InvoiceInheritModel(models.Model):
     _inherit = 'account.move.line'
 
     quality_id = fields.Many2one("carpet.product.quality")
-    sqf = fields.Float('SQ Feet')
     discount = fields.Float('Discount')
 
 
