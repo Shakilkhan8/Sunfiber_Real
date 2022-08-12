@@ -13,6 +13,9 @@
                             <tr>
                                 <th>Customer :
                                     <t t-esc="customer"/>
+                                    <t t-if="sub_customer">
+                                        (<t t-esc="sub_customer"/>)
+                                    </t>
                                 </th>
                                 <th>Destination :__________________</th>
                             </tr>
