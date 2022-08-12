@@ -34,7 +34,7 @@
                                       <t t-foreach="o.invoice_line_ids" t-as="p">
                                           <t t-set="ser" t-value="ser + 1"/>
                                           <t t-set="total_length" t-value="total_length + p.product_id.carpet_length"/>
-                                          <t t-set="total_qty" t-value="total_qty + p.quantity"/>
+                                          <t t-set="total_qty" t-value="total_qty + p.sqf"/>
                                           <t t-set="total_amount" t-value="total_amount + p.price_subtotal"/>
                                           <tr>
                                               <td>
@@ -86,7 +86,7 @@
                                       <t t-foreach="o.invoice_line_ids" t-as="p">
                                           <tr>
                                               <td>
-                                                  <p class="mt-2"> <t t-esc="p.quantity"/></p>
+                                                  <p class="mt-2"> <t t-esc="p.sqf"/></p>
                                               </td>
                                           </tr>
                                       </t>
