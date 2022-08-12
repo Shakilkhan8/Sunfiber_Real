@@ -14,14 +14,16 @@ class DeliveryPackingModel(models.Model):
                 data.append({
                 'design_name': line.design_id.name,
                 'quality_name': line.quality_id.name,
-                'color': line.color,
+                'child_design': line.product_id.digital_print_child.name if line.product_id.digital_print_child.name else '-',
                 'length': line.product_id.carpet_length,
                 'width': line.product_id.carpet_width,
                 'color': line.product_id.carpet_color,
+                'grade': line.product_id.carpet_grade_id.name,
             })
 
 
         return {
             'record1': data,
-            'order': order
+            'order': order,
+            'number': order.name,
         }

@@ -30,6 +30,7 @@
         'Report/report.xml',
         'Report/template.xml',
         'Report/report_formate.xml',
+        'Report/packing_list_header.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
