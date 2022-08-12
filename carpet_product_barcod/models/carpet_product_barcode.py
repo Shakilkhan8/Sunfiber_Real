@@ -10,7 +10,7 @@ class CarpetProductBarcode(models.Model):
     categ_id = fields.Many2one('product.category', 'Design *', required=True)
     carpet_color = fields.Char('Color *', required=True)
     carpet_quality = fields.Many2one("carpet.product.quality", "Quality *", requried=True)
-    location_id = fields.Many2one('stock.location', "Location *",  readonly=True, domain=[('usage', '=', 'internal')])
+    location_id = fields.Many2one('stock.location', "Location *",   readonly=True, domain=[('usage', '=', 'internal')])
     meters = fields.Float('Enter Meters *', required=True)
     carpet_grade_id = fields.Many2one('carpet.grade', 'Carpet Grade *', required=True)
     digital_print_child = fields.Many2one('digital.print.child', 'Child')

@@ -20,7 +20,7 @@
                                    <group><field name="meters"/></group>
                                    <group><field name="carpet_grade_id"/></group>
                                    <group><field name="carpet_quality" option="{'no_create':True}"/></group>
-                                   <group><field name="location_id"/></group>
+                                   <group><field name="location_id" invisible="True"/></group>
 
                                </div>
                                <button type="object" name="create_product_template" string="Create and Print" class="oe_highlight"/>
