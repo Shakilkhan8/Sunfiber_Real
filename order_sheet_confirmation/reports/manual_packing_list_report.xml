@@ -13,12 +13,12 @@
                                 <table style="border:1px solid gray">
                                     <thead style="border:1px solid gray">
                                         <th width="5%" style="border:1px solid gray" class="text-center">SR.</th>
-                                        <th width="20%" style="border:1px solid gray" class="text-center">Design Name</th>
-                                        <th width="20%" style="border:1px solid gray" class="text-center">Child Design</th>
+                                        <th width="40%" style="border:1px solid gray" class="text-center">Product</th>
+                                        <th width="20%" style="border:1px solid gray" class="text-center">Design</th>
                                         <th width="5%" style="border:1px solid gray" class="text-center">Quality</th>
                                         <th width="5%" style="border:1px solid gray" class="text-center">Color</th>
-                                        <th width="20%" style="border:1px solid gray" class="text-center">Length</th>
-                                        <th width="20%" style="border:1px solid gray" class="text-center">Width</th>
+                                        <th width="10%" style="border:1px solid gray" class="text-center">Length</th>
+                                        <th width="10%" style="border:1px solid gray" class="text-center">Width</th>
                                         <th width="5%" style="border:1px solid gray" class="text-center">Grade</th>
                                     </thead>
                                     <tbody>
@@ -33,20 +33,20 @@
                                                 <td width="5%" height="30" style="border:1px solid gray" class="text-center">
                                                     <t t-esc="ser"/>
                                                 </td>
-                                                <td width="10%" height="30" style="border:1px solid gray" class="text-center">
+                                                <td width="40%" height="30" style="border:1px solid gray" class="text-center">
                                                     <t t-esc="p['design_name']"/>
                                                 </td>
-                                                <td width="10%" height="30" style="border:1px solid gray" class="text-center">
+                                                <td width="20%" height="30" style="border:1px solid gray" class="text-center">
                                                     <t t-esc="p['child_design']"/>
                                                 </td>
-                                                <td width="10%" height="30" style="border:1px solid gray" class="text-center">
+                                                <td width="5%" height="30" style="border:1px solid gray" class="text-center">
                                                     <t t-esc="p['quality_id']"/>
                                                 </td>
                                                 <td width="5%" style="border:1px solid gray" class="text-center">
                                                     <t t-esc="p['color']"/>
                                                 </td>
-                                                <td width="25%" height="30" style="border:1px solid gray" class="text-center"></td>
-                                                <td width="25%" height="30" style="border:1px solid gray" class="text-center"></td>
+                                                <td width="5%" height="30" style="border:1px solid gray" class="text-center"></td>
+                                                <td width="5%" height="30" style="border:1px solid gray" class="text-center"></td>
                                                 <td width="5%" height="30" style="border:1px solid gray" class="text-center"></td>
                                             </tr>
 
@@ -55,12 +55,20 @@
                                             <td style="border:1px solid gray" colspan="2"><b>Total Rolls: <t t-esc="total_roll"/> </b></td>
                                             <td style="border:1px solid gray" colspan="3" class="text-center"></td>
                                             <td style="border:1px solid gray" ><b>Total Length:</b></td>
-                                            <td style="border:1px solid gray" colspan="2"></td>
+                                            <td style="border:1px solid gray" colspan="2"><b>Total Width:</b></td>
+
                                         </tr>
+
                                     </tbody>
 
                                 </table>
+
                             </div>
+                        <div class="row mt-3">
+                            <div class="col-4">
+                                <span><b>Signature ________________</b></span>
+                            </div>
+                        </div>
                     </div>
 
                 </t>

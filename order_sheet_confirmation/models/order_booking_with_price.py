@@ -91,9 +91,6 @@ class CarpetColorReport(models.AbstractModel):
                     'square_foot': line.square_foot,
                     'price_unit': line.price_unit,
                     'child_image': line.child_image,
-
-
-
                 })
 
         return {

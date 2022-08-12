@@ -3,16 +3,10 @@
     <data>
         <template id="delivery_header_id">
             <t t-set="company" t-value="user.company_id"/>
-
-            <!--					<div class="header" >-->
-
             <div class="header ">
-                <!--                         header of the report-->
                 <h5 class="text-center mt-1">
-					PACKING LIST UNIT-1 SUN FIBER PVT. LTD
+					PACKING LIST UNIT-2 SUN FIBER PVT. LTD
                 </h5>
-
-                <!--                       second section of the report-->
                 <div class="container">
                     <div class="row">
                         <table width="100%">
