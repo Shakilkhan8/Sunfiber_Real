@@ -30,8 +30,6 @@ class CarpetColorModel(models.Model):
 
     @api.model
     def create(self, vals_list):
-        for rec in self:
-            self.price_subtotal = 0
         res = super(CarpetColorModel, self).create(vals_list)
         return res
 
@@ -40,7 +38,7 @@ class CarpetColorModel(models.Model):
     def _onchange_oder_line(self):
 
         for rec in self.order_line:
-            # calculation of sutotal on the base of price unit and square feet
+            # calculation of subtotal on the base of price unit and square feet
             # rec.price_subtotal = 0
             # rec.price_subtotal = rec.square_foot * rec.price_unit
 
@@ -236,47 +234,6 @@ class InheritSaleOrderLine(models.Model):
             if self.env.context.get('import_file', False) and not self.env.user.user_has_groups(
                     'account.group_account_manager'):
                 line.tax_id.invalidate_cache(['invoice_repartition_line_ids'], [line.tax_id.id])
-
-
-
-# class InheritSaleOrder(models.Model):
-#     _inherit = 'sale.order'
-#
-#     def _create_invoices(self, grouped=False, final=False, date=None):
-#         res = super(InheritSaleOrder, self)._create_invoices(grouped, final)
-#         line_sum_up = []
-#         actual_line_dict = res.invoice_line_ids.read()
-#         o = 90
-#         existing_ids = res.invoice_line_ids.ids
-#         existing_line_ids = res.line_ids.ids
-#         for each_dict in actual_line_dict:
-#             dict_exist = next(
-#                 (item for item in line_sum_up if item[2]['quality_id'][0] ==
-#                  each_dict['quality_id'][0]), None)
-#             if not dict_exist:
-#                 each_dict['account_id'] = each_dict['account_id'][0]
-#                 line_sum_up.append(((0, 0, each_dict)))
-#             else:
-#                 dict_exist[2]['quantity'] += each_dict['quantity']
-#                 dict_exist[2]['price_subtotal'] += each_dict['price_subtotal']
-#                 dict_exist[2]['credit'] += each_dict['credit']
-#                 dict_exist[2]['debit'] += each_dict['debit']
-#
-#         # res.line_ids.unlink()
-#         res.invoice_line_ids = line_sum_up
-#
-#         # we will remove the old id's data here
-#
-#         # ids = set(res.invoice_line_ids.ids) - set(existing_ids)
-#         # o = res.write({'invoice_line_ids': next(iter(ids))})
-#         # for line in res.invoice_line_ids:
-#         #     if line.id in existing_ids:
-#         #         line.unlink()
-#         #
-#         # for line in res.line_ids:
-#         #     if line.id in existing_ids:
-#         #         line.unlink()
-#         return res
 
 
 class StockMoveModel(models.Model):
