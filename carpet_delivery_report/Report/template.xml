@@ -6,24 +6,46 @@
             <t t-call="web.html_container">
                 <t t-call="carpet_delivery_report.packing_list_report_id"/>
                 <t t-call="web.basic_layout">
-                    <div class="page" style="margin-top:0px">
-                        <div class="row">
-                            <div class="col-4">
-                                <span style="margin-left:-13px"><b>Invoice No#:</b> <t t-esc="number"/>  </span>
-                            </div>
-                        </div>
-                        <div class="row mt-1">
+                    <div class="page">
+                        <h5 class="text-center mt-1">
+					PACKING LIST UNIT-2 SUN FIBER PVT. LTD
+                </h5>
+                        <table width="100%">
+                            <tr>
+                                <td class="text-left">
+                                    <b>Customer:</b>
+                                    <t t-esc="order.partner_id.name"/>
+                                    <t t-if="order.sale_id.sub_customer">
+                                        (<t t-esc="order.sale_id.sub_customer"/>)
+                                    </t>
+                                </td>
+                                <td class="text-right">
+                                    <b>Destination </b>___________
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-left">
+                                    <b>Packing No#:</b> <t t-esc="number"/>
+                                </td>
+                                <td class="text-right">
+                                    <b>Order Numer:</b> <t t-esc="order_number"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="row mt-2">
 
                                 <table style="border:1px solid gray">
                                     <thead style="border:1px solid gray">
                                         <th width="5%" style="border:1px solid gray" class="text-center">SR.</th>
-                                        <th width="30%" style="border:1px solid gray" class="text-center">Product</th>
-                                        <th width="30%" style="border:1px solid gray" class="text-center">Design</th>
-                                        <th width="5%" style="border:1px solid gray" class="text-center">Quality</th>
-                                        <th width="5%" style="border:1px solid gray" class="text-center">Color</th>
+                                        <th width="35%" style="border:1px solid gray" class="text-center">Product</th>
+                                        <th width="10%" style="border:1px solid gray" class="text-center">Design</th>
+                                        <th width="10%" style="border:1px solid gray" class="text-center">Quality</th>
+                                        <th width="10%" style="border:1px solid gray" class="text-center">Color</th>
                                         <th width="10%" style="border:1px solid gray" class="text-center">Length</th>
                                         <th width="10%" style="border:1px solid gray" class="text-center">Width</th>
-                                        <th width="5%" style="border:1px solid gray" class="text-center">Grade</th>
+                                        <th width="10%" style="border:1px solid gray" class="text-center">Grade</th>
                                     </thead>
                                     <tbody>
                                         <t t-set="total_roll" t-value="0"/>
@@ -37,21 +59,21 @@
                                                 <td width="5%" height="30" style="border:1px solid gray" class="text-center">
                                                     <t t-esc="ser"/>
                                                 </td>
-                                                <td width="30%" height="30" style="border:1px solid gray" class="text-center">
+                                                <td width="35%" height="30" style="border:1px solid gray" class="text-center">
                                                     <t t-esc="p['design_name']"/>
                                                 </td>
-                                                <td width="30%" height="30" style="border:1px solid gray" class="text-center">
+                                                <td width="10%" height="30" style="border:1px solid gray" class="text-center">
                                                     <t t-esc="p['child_design']"/>
                                                 </td>
-                                                <td width="5%" height="30" style="border:1px solid gray" class="text-center">
+                                                <td width="10%" height="30" style="border:1px solid gray" class="text-center">
                                                     <t t-esc="p['quality_name']"/>
                                                 </td>
-                                                <td width="5%" style="border:1px solid gray" class="text-center">
+                                                <td width="10%" style="border:1px solid gray" class="text-center">
                                                     <t t-esc="p['color']"/>
                                                 </td>
-                                                <td width="5%" height="30" style="border:1px solid gray" class="text-center"><t t-esc="p['length']"/> </td>
-                                                <td width="5%" height="30" style="border:1px solid gray" class="text-center"><t t-esc="p['width']"/></td>
-                                                <td width="5%" height="30" style="border:1px solid gray" class="text-center"><t t-esc="p['grade']"/></td>
+                                                <td width="10%" height="30" style="border:1px solid gray" class="text-center"><t t-esc="p['length']"/> </td>
+                                                <td width="10%" height="30" style="border:1px solid gray" class="text-center"><t t-esc="p['width']"/></td>
+                                                <td width="10%" height="30" style="border:1px solid gray" class="text-center"><t t-esc="p['grade']"/></td>
                                             </tr>
 
                                         </t>
@@ -60,8 +82,9 @@
                                             <td style="border:1px solid gray" colspan="" class="text-center"></td>
                                             <td style="border:1px solid gray" colspan="" class="text-center"></td>
                                             <td style="border:1px solid gray" colspan="" class="text-center"></td>
-                                            <td style="border:1px solid gray" ><b>Total Length:</b></td>
-                                            <td style="border:1px solid gray" colspan="2"><b>Total Width:</b></td>
+                                            <td style="border:1px solid gray" ><b>Length:</b></td>
+                                            <td style="border:1px solid gray" colspan=""></td>
+                                            <td style="border:1px solid gray" colspan=""></td>
 
                                         </tr>
 
@@ -79,52 +102,6 @@
 
                 </t>
 
-
-
-
-
-
-
-
-
-               <!-- <t t-call="web.basic_layout">
-                    <div class="page" >
-                        <h3 style="text-align:center">PACKING LIST - UNIT-1 SUN FIBER PVT. LTD.</h3>
-                        <div class="row" style="margin-top:90px">
-                            <div class="col-4"><p style="margin-left:20px"><b>Date :</b> <t t-esc="order.scheduled_date"/> </p></div>
-                            <div class="col-4 text-center"><b>Customer:  </b> <t t-esc="order.partner_id.name"/> <t t-if="order.sale_id.customer_note">(<t t-esc="order.sale_id.customer_note"/> )</t></div>
-                            <div class="col-4 text-center"><b>Destination:</b> <t t-esc="order.partner_id.name"/> </div>
-                        </div>
-                        <br/>
-
-                        <div class="container">
-                            <div class="row">
-                                    <table width="100%" style="border:1px solid gray">
-                                        <tr style="border:1px solid gray">
-                                            <th style="border:1px solid gray">SR.No</th>
-                                            <th style="border:1px solid gray">Design Name</th>
-                                            <th style="border:1px solid gray">Quality</th>
-                                            <th style="border:1px solid gray">length</th>
-                                            <th style="border:1px solid gray">width</th>
-                                            <th style="border:1px solid gray">Color</th>
-                                        </tr>
-                                        <t t-set="ser1" t-value="0"/>
-                                        <t t-foreach="record1" t-as="rec1">
-                                            <t t-set="ser1" t-value="ser1 + 1"/>
-                                        <tr style="border:1px solid gray">
-                                            <td style="border:1px solid gray"><t t-esc="ser1"/></td>
-                                            <td style="border:1px solid gray"><t t-esc="rec1['design_name']"/></td>
-                                            <td style="border:1px solid gray"><t t-esc="rec1['quality_name']"/></td>
-                                            <td style="border:1px solid gray"><t t-esc="rec1['length']"/></td>
-                                            <td style="border:1px solid gray"><t t-esc="rec1['width']"/></td>
-                                            <td style="border:1px solid gray"><t t-esc="rec1['color']"/></td>
-                                        </tr>
-                                        </t>
-                                    </table>
-                            </div>
-                        </div>
-                    </div>
-                </t>-->
             </t>
         </template>
 
