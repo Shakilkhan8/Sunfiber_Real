@@ -96,7 +96,8 @@ class CarpetColorReport(models.AbstractModel):
             'customer_note': order.customer_note,
             'sub_customer': order.sub_customer,
             'order_date': order.date_order,
-            'delivery_confirm': order.delivery_confirm
+            'delivery_confirm': order.delivery_confirm,
+            'number': order.name
 
 
         }

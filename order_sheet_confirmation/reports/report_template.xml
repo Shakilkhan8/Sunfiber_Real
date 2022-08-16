@@ -4,6 +4,9 @@
              <t t-call="web.basic_layout">
                  <div class="header">
                      <p class="text-center" style="font-size:18px"><b>ORDER SHEET</b></p>
+                     <p style="font-size:18px" class="text-center">
+                         <strong><t t-esc="number"/></strong>
+                     </p>
                  </div>
                 <div class="page">
                     <div class="container">
