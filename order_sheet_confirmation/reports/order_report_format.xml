@@ -12,7 +12,7 @@
 
             <field name="orientation">Landscape</field>
 
-            <field name="margin_top">15</field>
+            <field name="margin_top">20</field>
 
             <field name="margin_bottom">7</field>
 
@@ -22,7 +22,7 @@
 
             <field name="header_line" eval="False"/>
 
-            <field name="header_spacing">15</field>
+            <field name="header_spacing">20</field>
 
             <field name="dpi">70</field>
 

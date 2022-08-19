@@ -7,7 +7,7 @@
                 <t t-call="order_sheet_confirmation.delivery_header_id"/>
                 <t t-call="web.basic_layout">
 
-                    <div class="page" style="margin-top:0px">
+                    <div class="page">
 
                         <div class="row">
                                 <table style="border:1px solid gray">
@@ -53,8 +53,9 @@
                                         </t>
                                         <tr>
                                             <td style="border:1px solid gray" colspan="2"><b>Total Rolls: <t t-esc="total_roll"/> </b></td>
-                                            <td style="border:1px solid gray" colspan="3" class="text-center"></td>
-                                            <td style="border:1px solid gray" colspan="2" ><b>Total Length:</b></td>
+                                            <td style="border:1px solid gray" colspan="3" class="text-center"><b>Total Length:</b></td>
+                                            <td style="border:1px solid gray" colspan="" ><b></b></td>
+                                            <td style="border:1px solid gray" colspan="" ><b></b></td>
                                             <td style="border:1px solid gray" colspan=""></td>
 
                                         </tr>

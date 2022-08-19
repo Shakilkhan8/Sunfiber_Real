@@ -700,7 +700,8 @@ class ManualPackingListModel(models.TransientModel):
         return {
             'data': lst,
             'customer': order.partner_id.name,
-            'sub_customer': order.sub_customer
+            'sub_customer': order.sub_customer,
+            'number': order.name,
         }
 
 

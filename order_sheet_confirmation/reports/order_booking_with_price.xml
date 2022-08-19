@@ -10,7 +10,7 @@
                          <strong><t t-esc="number"/></strong>
                      </p>
                  </div>
-                <div class="page">
+                <div class="page" style="margin-top:0px">
                     <div class="container">
                         <div class="row" style="border: 1px solid #e1e3e6;" >
                             <div class="col-12 text-center">
@@ -29,7 +29,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="row mt-1" style="margin-top:190px">
+                        <div class="row mt-1">
                             <div class="col-6">
                                 <strong style="margin-left:-10px;">Order Receive Date: </strong>
                                 <span style="margin-left:10px;"><t t-esc="order_date" t-options='{"widget": "date","format": "dd-MM-yyyy"}'/> </span>
@@ -46,7 +46,7 @@
                     <t t-set="total_price" t-value="0"/>
                     <t t-set="total_rolls" t-value="0"/>
                     <br/>
-                    <table class="table tbl-sm table-bordered mt-4">
+                    <table class="table tbl-sm table-bordered" style="margin-top:-15px">
                         <thead style="margin-top:20px">
                             <th class="text-center">Design</th>
                             <th class="text-center">Color</th>
