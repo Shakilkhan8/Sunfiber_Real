@@ -2,7 +2,7 @@
     <template id="carpet_color_report">
         <t t-call="web.html_container">
              <t t-call="web.basic_layout">
-                 <div class="header">
+                 <div class="header mt-2">
                      <p class="text-center" style="font-size:18px"><b>ORDER SHEET</b></p>
                      <p style="font-size:18px" class="text-center">
                          <strong><t t-esc="number"/></strong>
@@ -10,7 +10,7 @@
                  </div>
                 <div class="page">
                     <div class="container">
-                        <div class="row" style="border: 1px solid #e1e3e6;" >
+                        <div class="row mt-3" style="border: 1px solid #e1e3e6;" >
                             <div class="col-12 text-center">
                                <table width="100%"  style="text-align:center">
                                     <tr class="text-center">
@@ -39,7 +39,7 @@
                     <t t-set="total_price" t-value="0"/>
                     <t t-set="total_rolls" t-value="0"/>
                     <br/>
-                    <table class="table tbl-sm table-bordered mt-4">
+                    <table class="table tbl-sm table-bordered ">
                         <thead>
                             <th>Design</th>
                             <th>Color</th>
