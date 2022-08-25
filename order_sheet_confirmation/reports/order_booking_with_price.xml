@@ -1,53 +1,15 @@
 <odoo>
     <template id="order_booking_with_price">
         <t t-call="web.html_container">
+
             <t t-call="web.basic_layout">
-                 <div class="header">
-                     <p class="text-center" >
-                         <b>ORDER SHEET WITH ESTIMATED BILL</b>
-                     </p>
-                     <p class="text-center" style="font-size:18px">
-                         <strong><t t-esc="number"/></strong>
-                     </p>
-                 </div>
-                <div class="page" style="margin-top:0px">
-                    <div class="container">
-                        <div class="row" style="border: 1px solid #e1e3e6;" >
-                            <div class="col-12 text-center">
-                               <table width="100%"  style="text-align:center">
-                                   <tr class="text-center">
-                                       <td>
-                                           <b>Customer :</b>
-                                           <t t-esc="customer_name"/>
-                                           <t t-if="sub_customer">
-                                               (<t t-esc="sub_customer"/>)
-                                           </t>
-                                       </td>
-
-                                   </tr>
-
-                                </table>
-                            </div>
-                        </div>
-                        <div class="row mt-1">
-                            <div class="col-6">
-                                <strong style="margin-left:-10px;">Order Receive Date: </strong>
-                                <span style="margin-left:10px;"><t t-esc="order_date" t-options='{"widget": "date","format": "dd-MM-yyyy"}'/> </span>
-                            </div>
-
-                            <div class="col-6 text-right">
-                                <p  class="text-right ml-4">
-                                    <b>Delivery Terms: </b>
-                                    <t t-esc="delivery_confirm" />
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                <t t-call="order_sheet_confirmation.report_header_with_price_id"/>
+                <div class="page mt-4">
                     <t t-set="total_price" t-value="0"/>
                     <t t-set="total_rolls" t-value="0"/>
                     <br/>
-                    <table class="table tbl-sm table-bordered" style="margin-top:-15px">
-                        <thead style="margin-top:20px">
+                    <table class="table tbl-sm table-bordered">
+                        <thead style="">
                             <th class="text-center">Design</th>
                             <th class="text-center">Color</th>
                             <th class="text-center">Image</th>

@@ -33,6 +33,7 @@
         'reports/manual_packing_list_report.xml',
         'reports/manual_report_format.xml',
         'reports/report_header.xml',
+        'reports/report_header_with_price.xml',
         'reports/order_report_formate_with_price.xml',
         'views/templates.xml',
 
