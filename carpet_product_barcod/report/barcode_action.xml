@@ -5,10 +5,9 @@
                    id="product_barcode_action_id"
                    model="carpet.barcode"
                    report_type="qweb-pdf"
-                   string="LABEL"
+                   string="Product Barcode"
                    name="carpet_product_barcod.product_barcode_template_id"
                    file="carpet_product_barcod.product_barcode_template_id"
                />
-
     </data>
 </odoo>

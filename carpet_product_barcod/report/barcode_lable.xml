@@ -3,63 +3,49 @@
     <data>
 
         <template id="product_barcode_template_id">
-
             <t t-call="web.html_container">
                 <t t-call="web.basic_layout">
                     <div class="page">
                         <table with="100%">
                             <tr>
-                                <td>
-                                    <h6 style="margin-left:110px; font-style:bold; font-family: 'Times New Roman', Times, serif;">
+                                <td style="">
+                                    <h6 style="font-style:bold;margin-left:100px; font-size:40px; font-family: 'Times New Roman', Times, serif;">
                                         <t t-esc="product_name"/>
-                                     </h6>
+                                    </h6>
                                 </td>
                             </tr>
 
                             <tr>
                                 <td>
-                                   <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', barcode, 600, 100)"
-                                 style="width:540px;height:50px;"/>
+                                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', barcode, 600, 100)"
+                                         style="width:1300px;height:150px;margin-left:-190px;text-align:left;"/>
 
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <t t-esc="barcode"/>
                                 </td>
                             </tr>
 
                             <tr>
                                 <td>
-                                    <h5 class="text-center" style="font-style: underline"><b>SUN FIBER (PVT) Ltd</b> </h5>
+                                    <p style="margin-left:330px; font-size:40px;"><t t-esc="barcode"/></p>
                                 </td>
                             </tr>
 
                             <tr>
                                 <td>
-                                    <h5 class="text-center" style="font-style: underline"><b>UNIT - 2 FSB</b></h5>
+                                    <p style="font-style: underline;font-size:40px; margin-left:270px">
+                                        <b>SUN FIBER (PVT) Ltd</b>
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <hp style="font-style: underline;font-size:40px; margin-left:330px">
+                                        <b>UNIT - 2 FSB</b>
+                                    </hp>
                                 </td>
                             </tr>
 
                         </table>
-
-
-
-                        <!--<h6 style="margin-left:110px; font-style:bold; font-family: 'Times New Roman', Times, serif;">
-                            <t t-esc="product_name"/>
-                        </h6>-->
-                        <!--<p>
-                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', barcode, 600, 100)"
-                                 style="width:540px;height:50px;"/>
-                        </p>
-                        <p style="margin-left:200px">
-                            <t t-esc="barcode"/>
-                        </p>-->
-
-                        <!--<h5 class="text-center" style="font-style: underline"><b>SUN FIBER (PVT) Ltd</b> </h5>-->
-                        <!--<h5 class="text-center" style="font-style: underline"><b>UNIT - 2 FSB</b></h5>-->
-
                     </div>
                 </t>
             </t>

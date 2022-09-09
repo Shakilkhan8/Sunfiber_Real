@@ -30,6 +30,7 @@
         'views/carpet_product_barcode_view.xml',
         'report/barcode_action.xml',
         'report/barcode_lable.xml',
+        'report/barcode_formate.xml',
         # 'report/report_formate.xml',
         # 'report/report_formate.xml',
 
